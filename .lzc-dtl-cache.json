@@ -1,0 +1,36 @@
+{
+  "name": "AsPoem",
+  "package": "cloud.lazycat.app.aspoem",
+  "description": "现代化诗词学习网站，一个更加注重 UI和阅读体验 的诗词网站。",
+  "homepage": "https://github.com/meetqy/aspoem",
+  "author": "meetqy",
+  "app_features": [
+    "background_task",
+    "public_path"
+  ],
+  "subdomain": "aspoem",
+  "version": "0.0.1",
+  "public_paths": [
+    "/"
+  ],
+  "iconPath": "icon.png",
+  "composePath": "docker-compose.yml",
+  "unsupported_platforms": [],
+  "lastRouteType": "from_compose",
+  "port_mappings": {
+    "aspoem_2034_3000": {
+      "use": true,
+      "type": "http",
+      "path": "/",
+      "targetPath": "/"
+    }
+  },
+  "image_docker.hlmirror.com_mmmhaha85_aspoem_adb9250a1": {
+    "originalImage": "docker.hlmirror.com/mmmhaha85/aspoem:adb9250a1",
+    "pushTarget": "none"
+  },
+  "image_postgres_16.2": {
+    "originalImage": "postgres:16.2",
+    "pushTarget": "none"
+  }
+}
