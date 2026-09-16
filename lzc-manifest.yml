@@ -9,8 +9,8 @@ application:
       backend: http://aspoem:3000/
 services:
   aspoem:
-    # upstream: mmmhaha85/aspoem:adb9250a1
-    image: mmmhaha85/aspoem:adb9250a1
+    # upstream: mmmhaha85/aspoem:adb9250a1@sha256:fe8da160b5b33bef8bd4e80aee92c02c204c6f68058d9d9345d00b1050347f7a
+    image: registry.lazycat.cloud/czyt/mmmhaha85/aspoem:cdb228662894876c
     environment:
       - POSTGRES_PRISMA_URL=postgresql://postgres:{{ stable_secret "aspoem_db_password" }}@postgres:5432/aspoem
       - POSTGRES_URL_NON_POOLING=postgresql://postgres:{{ stable_secret "aspoem_db_password" }}@postgres:5432/aspoem
@@ -20,8 +20,8 @@ services:
     depends_on:
       - postgres
   postgres:
-    # upstream: postgres:16.2
-    image: postgres:16.2
+    # upstream: library/postgres:16.15
+    image: registry.lazycat.cloud/czyt/library/postgres:2f5a5be16000f666
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD={{ stable_secret "aspoem_db_password" }}
