@@ -1,0 +1,14 @@
+package: cloud.lazycat.app.aspoem
+version: 0.0.1
+name: AsPoem
+description: "现代化诗词学习网站，一个更加注重 UI和阅读体验 的诗词网站。"
+min_os_version: "1.5.0"
+homepage: https://github.com/meetqy/aspoem
+author: meetqy
+locales:
+  zh:
+    description: "现代化诗词学习网站，一个更加注重 UI和阅读体验 的诗词网站。"
+    name: AsPoem
+  en:
+    description: "A modern poetry learning website focusing on UI and reading experience."
+    name: AsPoem

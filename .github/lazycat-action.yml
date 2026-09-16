@@ -1,0 +1,51 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/aspoem.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: aspoem
+    bump: patch
+build:
+  run_buildscript: false
+images:
+  # 主应用：上游只有 commit-hash 类 immutable tag（adb9250a1），无 semver 家族 → custom + created 排序 + bump: patch
+  - id: aspoem
+    target: service
+    service: aspoem
+    source: mmmhaha85/aspoem
+    channel: custom
+    sort: created
+    tag_regex: '^[0-9a-f]{7,40}$'
+    delivery:
+      mode: lazycat
+  # 辅助 postgres：16.x 两段式 tag 家族 → custom + 版本映射
+  - id: postgres
+    target: service
+    service: postgres
+    source: library/postgres
+    channel: custom
+    sort: semver
+    tag_regex: '^16\.\d+$'
+    version_regex: '^(?P<version>16\.\d+)$'
+    version_template: '{version}.0'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: AsPoem
+    summary: "现代化诗词学习网站，注重 UI 与阅读体验"

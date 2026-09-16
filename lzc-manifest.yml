@@ -1,0 +1,35 @@
+application:
+  subdomain: aspoem
+  background_task: true
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://aspoem:3000/
+services:
+  aspoem:
+    # upstream: mmmhaha85/aspoem:adb9250a1
+    image: mmmhaha85/aspoem:adb9250a1
+    environment:
+      - POSTGRES_PRISMA_URL=postgresql://postgres:{{ stable_secret "aspoem_db_password" }}@postgres:5432/aspoem
+      - POSTGRES_URL_NON_POOLING=postgresql://postgres:{{ stable_secret "aspoem_db_password" }}@postgres:5432/aspoem
+      - TOKEN={{ stable_secret "aspoem_token" }}
+      - NEXT_PUBLIC_GA_ID=xx
+      - NEXT_PUBLIC_MC_ID=xx
+    depends_on:
+      - postgres
+  postgres:
+    # upstream: postgres:16.2
+    image: postgres:16.2
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD={{ stable_secret "aspoem_db_password" }}
+      - POSTGRES_DB=aspoem
+    binds:
+      - /lzcapp/var/db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      start_period: 90s
