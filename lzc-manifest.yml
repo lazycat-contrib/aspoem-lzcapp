@@ -20,8 +20,8 @@ services:
     depends_on:
       - postgres
   postgres:
-    # upstream: library/postgres:16.15
-    image: registry.lazycat.cloud/czyt/library/postgres:2f5a5be16000f666
+    # upstream: library/postgres:16.16
+    image: registry.lazycat.cloud/czyt/library/postgres:815e486d31346369
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD={{ stable_secret "aspoem_db_password" }}
